@@ -1,0 +1,16 @@
+version: 2
+team: r2d2
+application:
+  name: hello-nodejs-typescript
+  type: nodejs
+  runtime_version: 18
+deployment:
+  targetService: Cloud_Run
+  memory: 1Gi
+  project:
+    id:
+      ccx-web-nonprod: [dev, uat]
+      ccx-web-prod: [stg, prod]
+    alias: web
+  minInstance: 0
+  maxInstance: 1
