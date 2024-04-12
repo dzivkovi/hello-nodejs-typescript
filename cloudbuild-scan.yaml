@@ -1,0 +1,33 @@
+steps:
+  - name: 'node:current-slim'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        echo "Setting up the environment..." &&
+        npm install &&
+        echo "Dependencies installed." &&
+        npm run build &&
+        echo "Build completed." &&
+        npm install sonar-scanner --save-dev &&
+        chmod +x ./node_modules/sonar-scanner/bin/sonar-scanner &&
+        echo "SonarQube scanner installed and permissions set." &&
+        ./node_modules/sonar-scanner/bin/sonar-scanner \
+          -Dsonar.projectKey=dzivkovi_hello-nodejs-typescript \
+          -Dsonar.projectName="Hello NodeJS TypeScript Project" \
+          -Dsonar.organization=dzivkovi \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.token="${_SONAR_TOKEN}" \
+          -Dsonar.sources=src \
+          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.test.ts \
+          -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts \
+          -Dsonar.coverage.exclusions=**/*.spec.ts,**/*.test.ts \
+          -Dsonar.tests=src \
+          -Dsonar.sourceEncoding=UTF-8 &&
+        echo "SonarQube analysis completed."
+
+options:
+  dynamic_substitutions: true
+
+substitutions:
+  _SONAR_TOKEN: ''  # Remains empty in the YAML, set this variable at trigger time or via command line
