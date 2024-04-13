@@ -1,0 +1,21 @@
+steps:
+  - name: 'sonarsource/sonar-scanner-cli:latest'
+    id: SonarQube Analysis
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        echo "Setting up the environment..." && env &&
+        npm install &&
+        npm run build &&
+        npm install -g sonar-scanner &&
+        sonar-scanner -X -Dsonar.projectBaseDir=/workspace
+    env:
+      - 'SONAR_TOKEN=${_SONAR_TOKEN}'
+      - 'SONAR_SCANNER_OPTS=-Dsonar.projectKey=dzivkovi_hello-nodejs-typescript'
+
+options:
+  dynamic_substitutions: true
+
+substitutions:
+  _SONAR_TOKEN: ''  # Remains empty in the YAML, set this variable at trigger time or via command line

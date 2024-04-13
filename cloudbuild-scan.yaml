@@ -1,5 +1,5 @@
 steps:
-  - name: 'node:current-slim'
+  - name: 'gcr.io/$PROJECT_ID/sonar-scanner:latest'
     entrypoint: bash
     args:
       - '-c'
@@ -16,15 +16,14 @@ steps:
           -Dsonar.projectKey=dzivkovi_hello-nodejs-typescript \
           -Dsonar.projectName="Hello NodeJS TypeScript Project" \
           -Dsonar.organization=dzivkovi \
-          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.host.url='https://sonarcloud.io' \
           -Dsonar.token="${_SONAR_TOKEN}" \
           -Dsonar.sources=src \
-          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/*.test.ts \
-          -Dsonar.test.inclusions=**/*.spec.ts,**/*.test.ts \
-          -Dsonar.coverage.exclusions=**/*.spec.ts,**/*.test.ts \
+          -Dsonar.exclusions='**/node_modules/**,**/*.spec.ts,**/*.test.ts' \
+          -Dsonar.test.inclusions='**/*.spec.ts,**/*.test.ts' \
+          -Dsonar.coverage.exclusions='**/*.spec.ts,**/*.test.ts' \
           -Dsonar.tests=src \
-          -Dsonar.sourceEncoding=UTF-8 &&
-        echo "SonarQube analysis completed."
+          -Dsonar.sourceEncoding=UTF-8
 
 options:
   dynamic_substitutions: true
