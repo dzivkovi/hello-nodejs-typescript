@@ -5,7 +5,7 @@
 ### SonarCloud Project Setup
 
 - Create a project on [SonarCloud.io](https://sonarcloud.io) to obtain your unique project key and organization ID.
-- Navigate to your project's configuration page, typically under `https://sonarcloud.io/project/configuration?id=your_project_key` and setup your Analysis Method.
+- Navigate to your project's configuration page, typically under `https://sonarcloud.io/project/configuration?id=your_project_key` to setup your Analysis Method.
 - Here is the corresponding [SonarCloud project](https://sonarcloud.io/project/configuration?id=dzivkovi_hello-nodejs-typescript) for this POC.
 - Set up the `SONAR_TOKEN` environment variable with your SonarCloud token. In Windows:
 
@@ -13,7 +13,7 @@
     set SONAR_TOKEN=your_sonarqube_token
     ```
 
-    or in Unix-based systems:
+    Or in Unix-based systems:
 
     ```bash
     export SONAR_TOKEN=your_sonarqube_token
@@ -24,8 +24,8 @@
 These steps are optional if you are using Google Cloud Build for CI/CD.
 
 - Ensure Java and Maven are correctly installed and configured on your system.
-- Download SonarScanner CLI from the [official website](hhttps://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
-- Modify the path environment variable to include the location of your SonarScanner's `bin` directory.
+- Download the SonarScanner CLI from the [official website](https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/).
+- Modify the PATH environment variable to include the location of your SonarScanner's `bin` directory.
 
 #### SonarQube Validation (Windows)
 
@@ -37,7 +37,7 @@ sonar-scanner -D'sonar.host.url=https://sonarcloud.io'
 
 ## Google Cloud Build CI/CD Integration
 
-The solution is based on the [official Docker image](https://hub.docker.com/_/sonarqube) provided by SonarQube platform. Google Community contributed [image for SonarQube Scanner](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/sonarqube) did not work, not I was able create working cross-language alternative (other than JAva).
+The solution is based on the [official Docker image](https://hub.docker.com/_/sonarqube) provided by the SonarQube platform. The Google Community contributed [image for SonarQube Scanner](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/sonarqube) did not work, nor was I able to create a working cross-language alternative (other than Java).
 
 To integrate SonarQube analysis into Google Cloud Build, use the following command:
 
@@ -51,7 +51,7 @@ The "magic" is in the `[cloudbuild-sonarqube.yaml](cloudbuild-sonarqube.yaml)` f
 
 ### Scanner Reports
 
-SonaQube Scanner Report for this POC:
+SonarQube Scanner Report for this POC:
 
 - [Dashboard](https://sonarcloud.io/dashboard?id=dzivkovi_hello-nodejs-typescript)
 - [API](https://sonarcloud.io/api/qualitygates/project_status?projectKey=dzivkovi_hello-nodejs-typescript)
