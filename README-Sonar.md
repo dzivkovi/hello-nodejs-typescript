@@ -44,10 +44,10 @@ To integrate SonarQube analysis into Google Cloud Build, use the following comma
 ```bash
 export PROJECT_ID=$(gcloud config get-value project)
 
-gcloud builds submit --config cloudbuild-sonarqube.yaml --substitutions=_SONAR_TOKEN="$SONAR_TOKEN"
+gcloud builds submit --config cloudbuild-sonar.yaml --substitutions=_SONAR_TOKEN="$SONAR_TOKEN"
 ```
 
-The "magic" is in the `[cloudbuild-sonarqube.yaml](cloudbuild-sonarqube.yaml)` file and mounting the source code repo into the SonarQube Docker container.
+The "magic" is in the `[cloudbuild-sonar.yaml](cloudbuild-sonar.yaml)` file and mounting the source code repo into the SonarQube Docker container.
 
 ### Scanner Reports
 
